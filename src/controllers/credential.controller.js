@@ -13,7 +13,7 @@ export const signInClient = async (req, res) => {
     });
   }
 
-  try { 
+  try {
     const findUser = await User.findOne({
       attributes: ["id_usuario", "usuario", "email", "password"],
       include: {
@@ -73,7 +73,14 @@ export const signInPanel = async (req, res) => {
 
   try {
     const findUser = await User.findOne({
-      attributes: ["id_usuario", "usuario", "email", "password"],
+      attributes: [
+        "id_usuario",
+        "usuario",
+        "email",
+        "password",
+        "nombres",
+        "apellidos",
+      ],
       include: {
         model: Rol,
       },
@@ -101,6 +108,8 @@ export const signInPanel = async (req, res) => {
       id_usuario: findUser.id_usuario,
       id_rol: findUser.role.id_rol,
       nombre_rol: findUser.role.nombre,
+      nombres: findUser.nombres,
+      apellidos: findUser.apellidos,
       email: findUser.email,
       usuario: findUser.usuario,
     };
