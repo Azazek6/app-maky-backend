@@ -10,8 +10,8 @@ const router = Router();
 
 router.use("/auth", Auth);
 router.use("/usuarios", User);
-router.use("/marcas/:token", Brand);
-router.use("/categorias/:token", Category);
-router.use("/productos/:token", Product);
+router.use("/marcas", Brand);
+router.use("/categorias", Category);
+router.use("/productos", Product);
 
 export default router;

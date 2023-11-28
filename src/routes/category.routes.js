@@ -7,7 +7,7 @@ import { signInVerify } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
-router.post("/", [signInVerify], createCategory); // Registrar nueva categoria
+router.post("/:token", [signInVerify], createCategory); // Registrar nueva categoria
 router.get("/", listCategories); // Mostrar categorias
 
 export default router;
