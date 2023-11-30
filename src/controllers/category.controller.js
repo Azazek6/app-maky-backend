@@ -77,7 +77,7 @@ export const updateCategory = async (req, res) => {
     }
 
     return res.status(201).json({
-      message: "Se ha registrado una nueva categoria..!",
+      message: "Se ha modificado la categoria..!",
     });
   } catch (error) {
     return res.status(500).json({
