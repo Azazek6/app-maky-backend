@@ -10,6 +10,6 @@ const router = Router();
 
 router.post("/:token", [signInVerify], createProduct); // Registrar nuevo producto
 router.get("/", listProducts); // Listar productos registrados
-router.get("/:token/find/:id_producto", listProductForId); // Listar producto registrado por ID
+router.get("/find/:id_producto", listProductForId); // Listar producto registrado por ID
 
 export default router;

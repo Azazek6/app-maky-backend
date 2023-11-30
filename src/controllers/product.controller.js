@@ -5,6 +5,8 @@ import {
   ProductColor,
   Brand,
   Category,
+  Gender,
+  Stage,
 } from "../models/association.js";
 
 //Insertar producto
@@ -19,6 +21,8 @@ export const createProduct = async (req, res) => {
     size,
     image,
     description,
+    id_gender,
+    id_stage,
   } = req.body;
 
   if (
@@ -29,6 +33,8 @@ export const createProduct = async (req, res) => {
     !id_brand ||
     !id_category ||
     !description ||
+    !id_gender ||
+    !id_stage ||
     size.length == 0
   ) {
     return res.status(400).json({
@@ -62,6 +68,17 @@ export const createProduct = async (req, res) => {
         message: "Categoria no reconocida o no habilitada..!",
       });
     }
+
+    const findProduct = await Product.findOne({
+      where: { codigo: code, estado: 1 },
+    });
+
+    if (findProduct) {
+      return res.status(400).json({
+        message: "El codigo ingresado ya está en uso..!",
+      });
+    }
+
     const newData = await Product.create({
       codigo: code,
       nombre: name,
@@ -72,6 +89,8 @@ export const createProduct = async (req, res) => {
       imagen: image,
       descripcion: description,
       id_usuario: req.id_user,
+      id_genero: id_gender,
+      id_etapa: id_stage,
       fecha_registro: moment(),
     });
 
@@ -111,7 +130,7 @@ export const listProducts = async (req, res) => {
   try {
     const listData = await Product.findAll({
       attributes: [
-        "id_producto",
+        ["id_producto", "id"],
         "codigo",
         "nombre",
         "precio",
@@ -133,6 +152,14 @@ export const listProducts = async (req, res) => {
         {
           attributes: ["id_categoria", "nombre"],
           model: Category,
+        },
+        {
+          attributes: ["id_genero", "nombre"],
+          model: Gender,
+        },
+        {
+          attributes: ["id_etapa", "nombre"],
+          model: Stage,
         },
       ],
     });
@@ -164,7 +191,7 @@ export const listProductForId = async (req, res) => {
   try {
     const listData = await Product.findOne({
       attributes: [
-        "id_producto",
+        ["id_producto", "id"],
         "codigo",
         "nombre",
         "precio",
@@ -186,6 +213,14 @@ export const listProductForId = async (req, res) => {
         {
           attributes: ["id_categoria", "nombre"],
           model: Category,
+        },
+        {
+          attributes: ["id_genero", "nombre"],
+          model: Gender,
+        },
+        {
+          attributes: ["id_etapa", "nombre"],
+          model: Stage,
         },
       ],
       where: { id_producto: id_producto },

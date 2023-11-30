@@ -21,6 +21,10 @@ export const Product = database.define(
       type: DataTypes.DECIMAL,
       allowNull: false,
     },
+    cantidad: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     id_marca: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -38,6 +42,14 @@ export const Product = database.define(
       allowNull: true,
     },
     id_usuario: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    id_genero: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    id_etapa: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

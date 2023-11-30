@@ -37,6 +37,22 @@ CREATE TABLE categorias(
 	PRIMARY KEY(id_categoria)
 );
 
+CREATE TABLE generos(
+	id_genero INT AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL,
+	estado INT NOT NULL DEFAULT 1,
+	fecha_registro DATE NOT NULL,
+	PRIMARY KEY(id_genero)
+);
+
+CREATE TABLE etapas(
+	id_etapa INT AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL,
+	estado INT NOT NULL DEFAULT 1,
+	fecha_registro DATE NOT NULL,
+	PRIMARY KEY(id_etapa)
+);
+
 CREATE TABLE productos(
 	id_producto INT AUTO_INCREMENT,
 	codigo VARCHAR(120) NOT NULL,
@@ -48,12 +64,16 @@ CREATE TABLE productos(
 	imagen VARCHAR(255) DEFAULT NULL,
 	descripcion TEXT DEFAULT NULL,
 	id_usuario INT NOT NULL,
+	id_genero INT NOT NULL,
+	id_etapa INT NOT NULL,
 	estado INT NOT NULL DEFAULT 1,
 	fecha_registro DATE NOT NULL,
 	PRIMARY KEY(id_producto),
 	Foreign Key (id_marca) REFERENCES marcas(id_marca),
 	Foreign Key (id_categoria) REFERENCES categorias(id_categoria),
-	Foreign Key (id_usuario) REFERENCES usuarios(id_usuario)
+	Foreign Key (id_usuario) REFERENCES usuarios(id_usuario),
+	Foreign Key (id_genero) REFERENCES generos(id_genero),
+	Foreign Key (id_etapa) REFERENCES etapas(id_etapa)
 );
 
 CREATE TABLE producto_tallas(

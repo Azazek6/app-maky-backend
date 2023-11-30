@@ -44,7 +44,6 @@ export const User = database.define(
     estado: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 1,
     },
     fecha_registro: {
       type: DataTypes.DATE,
