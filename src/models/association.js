@@ -5,6 +5,7 @@ import { Category } from "./category.js";
 import { Gender } from "./gender.js";
 import { Stage } from "./stage.js";
 import { Product } from "./product.js";
+import { ProductImage } from "./product_image.js";
 import { ProductSize } from "./product_size.js";
 import { ProductColor } from "./product_color.js";
 
@@ -23,6 +24,9 @@ Gender.hasMany(Product, { foreignKey: "id_genero" });
 Product.belongsTo(Stage, { foreignKey: "id_etapa" });
 Stage.hasMany(Product, { foreignKey: "id_etapa" });
 
+ProductImage.belongsTo(Product, { foreignKey: "id_producto" });
+Product.hasMany(ProductImage, { foreignKey: "id_producto" });
+
 ProductSize.belongsTo(Product, { foreignKey: "id_producto" });
 Product.hasMany(ProductSize, { foreignKey: "id_producto" });
 
@@ -37,6 +41,7 @@ export {
   Gender,
   Stage,
   Product,
+  ProductImage,
   ProductSize,
   ProductColor,
 };

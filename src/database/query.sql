@@ -76,6 +76,14 @@ CREATE TABLE productos(
 	Foreign Key (id_etapa) REFERENCES etapas(id_etapa)
 );
 
+CREATE TABLE producto_imagenes(
+	id_producto_imagen INT AUTO_INCREMENT,
+	id_producto INT NOT NULL,
+	imagen VARCHAR(120) NOT NULL,
+	PRIMARY KEY(id_producto_imagen),
+	Foreign Key (id_producto) REFERENCES productos(id_producto)
+);
+
 CREATE TABLE producto_tallas(
 	id_producto_talla INT AUTO_INCREMENT,
 	id_producto INT NOT NULL,
