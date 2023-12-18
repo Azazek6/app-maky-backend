@@ -1,4 +1,6 @@
 -- Active: 1700627637371@@127.0.0.1@3306@db_makys_shop
+CREATE DATABASE IF NOT EXISTS sb_makys_shop;
+
 CREATE TABLE roles(
 	id_rol INT AUTO_INCREMENT,
 	nombre VARCHAR(50) NOT NULL,
@@ -103,4 +105,54 @@ CREATE TABLE producto_colores(
 	fecha_registro DATE NOT NULL,
 	PRIMARY KEY(id_producto_color),
 	Foreign Key (id_producto) REFERENCES productos(id_producto)
+);
+
+CREATE TABLE ordenes(
+	id_orden INT AUTO_INCREMENT,
+	id_usuario INT NOT NULL,
+	imagen_compra VARCHAR(255) NULL,
+	monto_total DECIMAL(12,2) NOT NULL,
+	tipo_envio VARCHAR(50) NOT NULL,
+	distrito VARCHAR(50) NOT NULL,
+	provincia VARCHAR(50) NOT NULL,
+	calle_numero VARCHAR(50) NOT NULL,
+	oficina VARCHAR(50) NULL,
+	codigo_postal VARCHAR(50) NULL,
+	detalles_orden TEXT NULL,
+	correo VARCHAR(50) NOT NULL,
+	nombres VARCHAR(50) NOT NULL,
+	apellidos VARCHAR(50) NOT NULL,
+	telefono VARCHAR(50) NOT NULL,
+	tipo_compra VARCHAR(50) NOT NULL,
+	documento VARCHAR(50) NOT NULL,
+	razon_social VARCHAR(200) NULL,
+	medio_pago VARCHAR(50) NOT NULL,
+	estado VARCHAR(50) DEFAULT 'PENDIENTE',
+	fecha_registro DATETIME NOT NULL,
+	PRIMARY KEY(id_orden),
+	Foreign Key (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE orden_detalles(
+	id_orden_detalle INT AUTO_INCREMENT,
+	id_orden INT NOT NULL,
+	id_producto INT NOT NULL,
+	cantidad INT NOT NULL,
+	precio_unidad DECIMAL(12,2) NOT NULL,
+	total DECIMAL(12,2) NOT NULL,
+	PRIMARY KEY(id_orden_detalle),
+	Foreign Key (id_orden) REFERENCES ordenes(id_orden),
+	Foreign Key (id_producto) REFERENCES productos(id_producto)
+);
+
+CREATE TABLE clientes(
+	id_cliente INT AUTO_INCREMENT,
+	tipo_documento VARCHAR(20) NOT NULL,
+	documento VARCHAR(50) NOT NULL,
+	nombres VARCHAR(50) NOT NULL,
+	apellidos VARCHAR(150) NULL,
+	email VARCHAR(150) NULL,
+	telefono INT NULL,
+	fecha_registro DATE NOT NULL,
+	PRIMARY KEY(id_cliente)
 );

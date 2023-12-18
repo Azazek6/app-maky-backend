@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { signInVerify } from "../middleware/auth.middleware.js";
 import Auth from "./auth.routes.js";
 import User from "./user.routes.js";
 import Brand from "./brand.routes.js";
 import Category from "./category.routes.js";
 import Product from "./product.routes.js";
+import Order from "./order.routes.js";
+import Client from "./client.routes.js";
 
 const router = Router();
 
@@ -13,5 +14,7 @@ router.use("/usuarios", User);
 router.use("/marcas", Brand);
 router.use("/categorias", Category);
 router.use("/productos", Product);
+router.use("/ordenes", Order);
+router.use("/clientes", Client);
 
 export default router;
