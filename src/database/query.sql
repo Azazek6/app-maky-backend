@@ -7,6 +7,9 @@ CREATE TABLE roles(
 	PRIMARY KEY(id_rol)
 );
 
+INSERT INTO roles(nombre) VALUES('CLIENTE');
+INSERT INTO roles(nombre) VALUES('USUARIO_PANEL');
+
 CREATE TABLE usuarios(
 	id_usuario INT AUTO_INCREMENT,
 	id_rol INT NOT NULL,
@@ -22,6 +25,8 @@ CREATE TABLE usuarios(
 	PRIMARY KEY(id_usuario),
 	Foreign Key (id_rol) REFERENCES roles(id_rol)
 );
+
+INSERT INTO usuarios(id_rol,documento,nombres,apellidos,usuario,email,telefono,password,estado,fecha_registro) VALUES(2,40156898,'ESMERALDA','GOMEZ',40156898,'esmeralda@gmail.com',965487568,'$2a$10$lfwsHNlPQPZSMmBMR5EA/ut/EGlu7JOtRPKoqJX5cg4Kabt4sp8Ry',1,'2023-11-29');
 
 CREATE TABLE marcas(
 	id_marca INT AUTO_INCREMENT,
