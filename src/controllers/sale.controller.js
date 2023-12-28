@@ -106,7 +106,7 @@ export const createSale = async (req, res) => {
   }
 };
 
-//Listar venta para PDF
+//Listar venta para PDF por id
 export const listReportPDF = async (req, res) => {
   const { id_sale } = req.params;
 
@@ -140,6 +140,38 @@ export const listReportPDF = async (req, res) => {
       ],
       where: { id_venta: id_sale },
     });
+
+    return res.status(200).json(list);
+  } catch (error) {
+    return res.status(500).json({
+      message: `SERVER_ERROR:: ${error}`,
+    });
+  }
+};
+
+// Listar ventas en general
+export const listSales = async (req, res) => {
+  try {
+    const list = await Sale.findAll({
+      include: [
+        {
+          model: SaleDetail,
+          include: {
+            attributes: ["nombre"],
+            model: Product,
+          },
+        },
+        {
+          model: Client,
+        },
+      ],
+    });
+
+    if (list.length == 0) {
+      return res.status(400).json({
+        message: "Aun no hay ventas",
+      });
+    }
 
     return res.status(200).json(list);
   } catch (error) {
