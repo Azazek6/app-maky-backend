@@ -156,3 +156,33 @@ CREATE TABLE clientes(
 	fecha_registro DATE NOT NULL,
 	PRIMARY KEY(id_cliente)
 );
+
+CREATE TABLE ventas(
+	id_venta INT AUTO_INCREMENT,
+	id_orden INT NULL,
+	id_usuario INT NOT NULL,
+	id_cliente INT NOT NULL,
+	tipo_comprobante VARCHAR(50) NOT NULL,
+	tipo_pago VARCHAR(50) NOT NULL,
+	total DECIMAL(12,2) NOT NULL,
+	observaciones TEXT NULL,
+	fecha_registro DATE NOT NULL,
+	estado VARCHAR(50) NULL DEFAULT 'EMITIDO',
+	PRIMARY KEY (id_venta),
+	Foreign Key (id_orden) REFERENCES ordenes(id_orden),
+	Foreign Key (id_usuario) REFERENCES usuarios(id_usuario),
+	Foreign Key (id_cliente) REFERENCES clientes(id_cliente)
+);
+
+CREATE TABLE detalle_ventas(
+	id_detalle_venta INT NOT NULL AUTO_INCREMENT,
+	id_venta INT NOT NULL,
+	id_producto INT NOT NULL,
+	precio DECIMAL(12,2) NOT NULL,
+	cantidad INT NOT NULL,
+	importe_total DECIMAL(12,2) NOT NULL,
+	descuento DECIMAL(12,2) NOT NULL,
+	PRIMARY KEY(id_detalle_venta),
+	Foreign Key (id_venta) REFERENCES ventas(id_venta),
+	Foreign Key (id_producto) REFERENCES productos(id_producto)
+);

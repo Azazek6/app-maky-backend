@@ -11,6 +11,8 @@ import { ProductColor } from "./product_color.js";
 import { Order } from "./order.js";
 import { OrderDetail } from "./order_detail.js";
 import { Client } from "./client.js";
+import { Sale } from "./venta.js";
+import { SaleDetail } from "./detalle_venta.js";
 
 User.belongsTo(Rol, { foreignKey: "id_rol" });
 Rol.hasMany(User, { foreignKey: "id_rol" });
@@ -45,6 +47,21 @@ Order.hasMany(OrderDetail, { foreignKey: "id_orden" });
 OrderDetail.belongsTo(Product, { foreignKey: "id_producto" });
 Product.hasMany(OrderDetail, { foreignKey: "id_producto" });
 
+Sale.belongsTo(Order, { foreignKey: "id_orden" });
+Order.hasMany(Sale, { foreignKey: "id_orden" });
+
+Sale.belongsTo(User, { foreignKey: "id_usuario" });
+User.hasMany(Sale, { foreignKey: "id_usuario" });
+
+Sale.belongsTo(Client, { foreignKey: "id_cliente" });
+Client.hasMany(Sale, { foreignKey: "id_cliente" });
+
+SaleDetail.belongsTo(Sale, { foreignKey: "id_venta" });
+Sale.hasMany(SaleDetail, { foreignKey: "id_venta" });
+
+SaleDetail.belongsTo(Product, { foreignKey: "id_producto" });
+Product.hasMany(SaleDetail, { foreignKey: "id_producto" });
+
 export {
   Rol,
   User,
@@ -59,4 +76,6 @@ export {
   Order,
   OrderDetail,
   Client,
+  Sale,
+  SaleDetail,
 };

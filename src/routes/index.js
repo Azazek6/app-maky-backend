@@ -6,6 +6,7 @@ import Category from "./category.routes.js";
 import Product from "./product.routes.js";
 import Order from "./order.routes.js";
 import Client from "./client.routes.js";
+import Sale from "./sale.routes.js";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use("/categorias", Category);
 router.use("/productos", Product);
 router.use("/ordenes", Order);
 router.use("/clientes", Client);
+router.use("/ventas", Sale);
 
 export default router;
